@@ -1,0 +1,38 @@
+﻿@model FilmDetailsViewModel
+
+<h2>@Model.Film.Title</h2>
+<p>Yönetmen: @Model.Film.Director</p>
+<p>Yıl: @Model.Film.Year</p>
+
+<h3>Yorumlar</h3>
+@if (Model.Reviews != null && Model.Reviews.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Kullanıcı</th>
+                <th>Puan</th>
+                <th>Yorum</th>
+                <th>Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model.Reviews)
+            {
+                <tr>
+                    <td>@review?.User?.Username ?? "Kullanıcı bilgisi yok"</td>
+                    <td>@review?.Rating ?? 0</td>
+                    <td>@review?.ReviewText ?? "Yorum yok"</td>
+                    <td>@review?.ReviewDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Henüz bu filme yapılmış bir yorum yok.</p>
+}
+
+
+<a asp-action="Create" asp-controller="Review" asp-route-filmId="@Model.Film.FilmId" class="btn btn-primary">Yorum Ekle</a>

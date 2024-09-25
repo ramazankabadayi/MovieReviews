@@ -1,0 +1,25 @@
+﻿@model IEnumerable<MovieReviewsEL.DTO.ReviewDTO>
+
+<h2>Yorumlar</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kullanıcı</th>
+            <th>Yorum</th>
+            <th>Puan</th>
+            <th>Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var review in Model)
+        {
+            <tr>
+                <td>@review.User.Username</td>
+                <td>@review.ReviewText</td>
+                <td>@review.Rating</td>
+                <td>@review.ReviewDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

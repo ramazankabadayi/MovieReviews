@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MovieReviewsEL.DTO.FilmDTO>
+
+<h2>Movies</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Year</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td><img src="@film.CoverImagePath" alt="Cover Image" style="max-width: 100px;" /></td>
+                <td style="vertical-align:middle; font-size:25px;"  >@film.Title</td>              
+                <td style="vertical-align:middle">@film.Director</td>
+                <td style="vertical-align:middle">@film.Year</td>
+                <td style="vertical-align:middle">
+                    <a href="@Url.Action("Details", "Film", new { id = film.FilmId })" class="btn btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <a href="@Url.Action("Create", "Film")" class="btn btn-success">Add New Movie</a>
+
+

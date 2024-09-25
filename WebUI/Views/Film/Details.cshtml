@@ -1,0 +1,40 @@
+﻿@model FilmDetailsViewModel
+
+<h2>@Model.Film.Title</h2>
+<img src="@Model.Film.CoverImagePath" alt="Cover" style="max-width: 200px;" />
+<p>Director: @Model.Film.Director</p>
+<td>@Model.Film.Description</td>
+<p>Year: @Model.Film.Year</p>
+
+<h3>Reviews</h3>
+@if (Model.Reviews != null && Model.Reviews.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model.Reviews)
+            {
+                <tr>
+                    <td>@(review?.User?.Username != null ? review.User.Username.ToString() : "User not found")</td>
+                    <td>@(review?.Rating != null ? review.Rating.ToString() : "0")</td>
+                    <td>@(!string.IsNullOrEmpty(review?.ReviewText) ? review.ReviewText : "Reviews not found")</td>
+                    <td>@(review?.ReviewDate != null ? review.ReviewDate.ToShortDateString() : "Date info not found")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>There is not any reviews for this movie</p>
+}
+
+
+<a asp-action="Create" asp-controller="Review" asp-route-filmId="@Model.Film.FilmId" class="btn btn-primary">Add Review</a>

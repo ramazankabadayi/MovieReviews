@@ -1,0 +1,35 @@
+﻿@using MovieReviewsEL.DTO
+@model ReviewDTO
+
+<h2>Add New Review</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="FilmId" />
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="form-group">
+        <label for="Rating">Rating</label>
+        <select asp-for="Rating" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ReviewText">Review</label>
+        <textarea asp-for="ReviewText" class="form-control"></textarea>
+        <span asp-validation-for="ReviewText" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Review</button>
+</form>
